@@ -23,9 +23,11 @@ h1, h2, h3, h4, h5, p {
 .gallery_col .gallery_item {
     display: block;
     transition: 0.75s;
+    
 }
 .gallery_col:hover .gallery_item {
     transform: scale(1.3);
+    
 }
 .gallery_item {
     height: 27.5rem;
