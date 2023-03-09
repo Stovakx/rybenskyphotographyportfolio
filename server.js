@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 
-app.use("/public", express.static(process.cwd() + "/public")); //make public static
+app.use("/", express.static(process.cwd() + "/")); //make public static
 
 const transporter = nodemailer.createTransport({
   service: 'smtp.ethereal.email',
@@ -64,7 +64,7 @@ app.post("/send", (req, res) => {
 
 //Index page (static HTML)
 app.route("/").get(function (req, res) {
-  res.sendFile(process.cwd() + "/public/index.html");
+  res.sendFile(process.cwd() + "/index.html");
 });
 
 /*************************************************/
