@@ -1,10 +1,10 @@
-'use strict';
-
-const form = document.getElementById("contact-form");
+//for nodemailer!!
+const form = document.getElementById("contactForm");
 
 const formEvent = form.addEventListener("submit", (event) => {
   event.preventDefault();
   let mail = new FormData(form);
+  
   sendMail(mail);
 });
 
@@ -15,4 +15,6 @@ const sendMail = (mail) => {
   }).then((response) => {
     return response.json();
   })
+  .catch((error) => {
+    console.log(error);})
 }

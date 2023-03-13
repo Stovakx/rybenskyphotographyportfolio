@@ -1,5 +1,4 @@
 const express = require("express");
-
 const nodemailer = require("nodemailer");
 const multiparty = require("multiparty");
 require("dotenv").config();
@@ -9,15 +8,15 @@ const PORT = process.env.PORT || 5000;
 // instantiate an express app
 const app = express();
 
-
+//nodemailer
 app.use("/", express.static(process.cwd() + "/")); //make public static
 
 const transporter = nodemailer.createTransport({
-  service: 'smtp.ethereal.email',
+  service: 'smtp-relay.gmail.com4',
   port: 587,
   auth: {
-    user: 'orion.oconnell45@ethereal.email',
-    pass: 'ycCnUrC4yTWqD4p3Ng'
+    user: 'rybenskyphoto@gmail.com',
+    pass: 'vfrntixyaoyrudji'
   }
 })
 
@@ -42,7 +41,7 @@ app.post("/send", (req, res) => {
 
     //2. You can configure the object however you want
     const mail = {
-      from: data.name,
+      from: data.email,
       to: 'Robin.Palatas@gmail.com',
       subject: data.subject,
       text: `${data.firstName} ${data.lastName}\n
@@ -54,10 +53,11 @@ app.post("/send", (req, res) => {
     transporter.sendMail(mail, (err, data) => {
       if (err) {
         console.log(err);
-        res.status(500).send("Something went wrong, try again please.");
+        res.status(500).json({ message: "Something went wrong, try again please." });
       } else {
-        res.status(200).send("Email was sent!");
+        res.status(200).json({ message: "Email was sent!" });
       }
+      
     });
   });
 });
