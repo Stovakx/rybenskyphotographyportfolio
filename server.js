@@ -1,6 +1,8 @@
+'use strict'
 const express = require("express");
 const nodemailer = require("nodemailer");
 const multiparty = require("multiparty");
+
 require("dotenv").config();
 
 const PORT = process.env.PORT || 5000;
@@ -12,7 +14,7 @@ const app = express();
 app.use("/", express.static(process.cwd() + "/")); //make public static
 
 const transporter = nodemailer.createTransport({
-  service: 'smtp-relay.gmail.com4',
+  service: 'smtp.gmail.com',
   port: 587,
   auth: {
     user: 'rybenskyphoto@gmail.com',
@@ -61,15 +63,20 @@ app.post("/send", (req, res) => {
     });
   });
 });
-
+//end of nodemailer
 //Index page (static HTML)
 app.route("/").get(function (req, res) {
   res.sendFile(process.cwd() + "/index.html");
 });
 
-/*************************************************/
 // Express server listening...
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
 });
+
+
+
+
+
+//adminjs
 

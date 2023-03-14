@@ -1,20 +1,25 @@
-//for nodemailer!!
 const form = document.getElementById("contactForm");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-const formEvent = form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  let mail = new FormData(form);
-  
-  sendMail(mail);
-});
+  const formData = new FormData(form);
 
-const sendMail = (mail) => {
   fetch("/send", {
-    method: "post",
-    body: mail,
-  }).then((response) => {
-    return response.json();
+    method: "POST",
+    body: formData,
   })
-  .catch((error) => {
-    console.log(error);})
-}
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      alert(data.message);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("There was a problem sending your message. Please try again later.");
+    });
+});
